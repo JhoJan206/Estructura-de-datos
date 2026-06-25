@@ -4534,7 +4534,7 @@ int main() {
       const speedNames = ['', 'Muy lenta', 'Lenta', 'Media', 'R\u00e1pida', 'Muy r\u00e1pida'];
 
       let arr = [];
-      let running = false;
+      let running = false, token = 0;
 
       function getDelay() {
         const v = parseInt(speedSlider.value);
@@ -4579,6 +4579,7 @@ int main() {
       }
 
       function resetVisualizer() {
+        token++;
         running = false;
         const size = parseInt(slider.value);
         generateArray(size);
@@ -4597,6 +4598,7 @@ int main() {
 
       async function runBubbleSort() {
         running = true;
+        const myId = ++token;
         startBtn.disabled = true;
         status.textContent = 'Ordenando...';
 
@@ -4613,10 +4615,12 @@ int main() {
 
             drawBars({ comparing: [j, j + 1], sorted: [...sortedIndices] });
             await sleep(getDelay());
+            if (myId !== token) { running = false; startBtn.disabled = false; status.textContent = 'Animación detenida.'; return; }
 
             if (arr[j] > arr[j + 1]) {
               drawBars({ swapping: [j, j + 1], sorted: [...sortedIndices] });
               await sleep(getDelay() * 1.5);
+            if (myId !== token) { running = false; startBtn.disabled = false; status.textContent = 'Animación detenida.'; return; }
 
               let temp = arr[j];
               arr[j] = arr[j + 1];
@@ -4624,11 +4628,13 @@ int main() {
 
               drawBars({ swapping: [j, j + 1], sorted: [...sortedIndices] });
               await sleep(getDelay());
+            if (myId !== token) { running = false; startBtn.disabled = false; status.textContent = 'Animación detenida.'; return; }
             }
           }
           sortedIndices.add(n - 1 - i);
           drawBars({ sorted: [...sortedIndices] });
           await sleep(getDelay() * 0.6);
+            if (myId !== token) { running = false; startBtn.disabled = false; status.textContent = 'Animación detenida.'; return; }
         }
         sortedIndices.add(0);
         drawBars({ sorted: [...sortedIndices] });
@@ -4666,7 +4672,7 @@ int main() {
       const speedNames = ['', 'Muy lenta', 'Lenta', 'Media', 'R\u00e1pida', 'Muy r\u00e1pida'];
 
       let arr = [];
-      let running = false;
+      let running = false, token = 0;
 
       function getDelay() {
         const v = parseInt(speedSlider.value);
@@ -4711,6 +4717,7 @@ int main() {
       }
 
       function resetVisualizer() {
+        token++;
         running = false;
         const size = parseInt(slider.value);
         generateArray(size);
@@ -4729,6 +4736,7 @@ int main() {
 
       async function runImprovedBubbleSort() {
         running = true;
+        const myId = ++token;
         startBtn.disabled = true;
         status.textContent = 'Ordenando...';
 
@@ -4747,10 +4755,12 @@ int main() {
 
             drawBars({ comparing: [j, j + 1], sorted: [...sortedIndices] });
             await sleep(getDelay());
+            if (myId !== token) { running = false; startBtn.disabled = false; status.textContent = 'Animación detenida.'; return; }
 
             if (arr[j] > arr[j + 1]) {
               drawBars({ swapping: [j, j + 1], sorted: [...sortedIndices] });
               await sleep(getDelay() * 1.5);
+            if (myId !== token) { running = false; startBtn.disabled = false; status.textContent = 'Animación detenida.'; return; }
 
               let temp = arr[j];
               arr[j] = arr[j + 1];
@@ -4758,6 +4768,7 @@ int main() {
 
               drawBars({ swapping: [j, j + 1], sorted: [...sortedIndices] });
               await sleep(getDelay());
+            if (myId !== token) { running = false; startBtn.disabled = false; status.textContent = 'Animación detenida.'; return; }
 
               swapped = true;
             }
@@ -4766,6 +4777,7 @@ int main() {
           sortedIndices.add(n - 1 - i);
           drawBars({ sorted: [...sortedIndices] });
           await sleep(getDelay() * 0.6);
+            if (myId !== token) { running = false; startBtn.disabled = false; status.textContent = 'Animación detenida.'; return; }
 
           if (!swapped) {
             for (let k = 0; k < n; k++) sortedIndices.add(k);
@@ -4805,7 +4817,7 @@ int main() {
       const speedNames = ['', 'Muy lenta', 'Lenta', 'Media', 'R\u00e1pida', 'Muy r\u00e1pida'];
 
       let arr = [];
-      let running = false;
+      let running = false, token = 0;
 
       function getDelay() {
         const v = parseInt(speedSlider.value);
@@ -4852,6 +4864,7 @@ int main() {
       }
 
       function resetVisualizer() {
+        token++;
         running = false;
         const size = parseInt(slider.value);
         generateArray(size);
@@ -4870,6 +4883,7 @@ int main() {
 
       async function runQuickSort() {
         running = true;
+        const myId = ++token;
         startBtn.disabled = true;
         status.textContent = 'Ordenando...';
 
@@ -4884,11 +4898,13 @@ int main() {
 
             drawBars({ comparing: [j], pivot: high, sorted: [...sortedIndices] });
             await sleep(getDelay());
+            if (myId !== token) { running = false; startBtn.disabled = false; status.textContent = 'Animación detenida.'; return -1; }
 
             if (arr[j] < pivot) {
               i++;
               drawBars({ swapping: [i, j], pivot: high, sorted: [...sortedIndices] });
               await sleep(getDelay() * 1.5);
+            if (myId !== token) { running = false; startBtn.disabled = false; status.textContent = 'Animación detenida.'; return -1; }
 
               let temp = arr[i];
               arr[i] = arr[j];
@@ -4896,6 +4912,7 @@ int main() {
 
               drawBars({ sorted: [...sortedIndices] });
               await sleep(getDelay());
+            if (myId !== token) { running = false; startBtn.disabled = false; status.textContent = 'Animación detenida.'; return -1; }
             }
           }
 
@@ -4903,6 +4920,7 @@ int main() {
 
           drawBars({ swapping: [i + 1, high], sorted: [...sortedIndices] });
           await sleep(getDelay() * 1.5);
+            if (myId !== token) { running = false; startBtn.disabled = false; status.textContent = 'Animación detenida.'; return -1; }
 
           let temp = arr[i + 1];
           arr[i + 1] = arr[high];
@@ -4919,12 +4937,14 @@ int main() {
             sortedIndices.add(pi);
             drawBars({ sorted: [...sortedIndices] });
             await sleep(getDelay() * 0.6);
+            if (myId !== token) { running = false; startBtn.disabled = false; status.textContent = 'Animación detenida.'; return; }
             await quickSort(low, pi - 1, sortedIndices);
             await quickSort(pi + 1, high, sortedIndices);
           } else if (low >= 0 && low < arr.length && !sortedIndices.has(low)) {
             sortedIndices.add(low);
             drawBars({ sorted: [...sortedIndices] });
             await sleep(getDelay() * 0.6);
+            if (myId !== token) { running = false; startBtn.disabled = false; status.textContent = 'Animación detenida.'; return; }
           }
         }
 
@@ -4966,7 +4986,7 @@ int main() {
       const speedNames = ['', 'Muy lenta', 'Lenta', 'Media', 'R\u00e1pida', 'Muy r\u00e1pida'];
 
       let arr = [];
-      let running = false;
+      let running = false, token = 0;
 
       function getDelay() {
         const v = parseInt(speedSlider.value);
@@ -5011,6 +5031,7 @@ int main() {
       }
 
       function resetVisualizer() {
+        token++;
         running = false;
         const size = parseInt(slider.value);
         generateArray(size);
@@ -5029,6 +5050,7 @@ int main() {
 
       async function runShellSort() {
         running = true;
+        const myId = ++token;
         startBtn.disabled = true;
         status.textContent = 'Ordenando...';
 
@@ -5054,16 +5076,19 @@ int main() {
 
               drawBars({ comparing: [j, j - gap] });
               await sleep(getDelay());
+            if (myId !== token) { running = false; startBtn.disabled = false; status.textContent = 'Animación detenida.'; return; }
 
               if (arr[j - gap] > temp) {
                 drawBars({ swapping: [j, j - gap] });
                 await sleep(getDelay() * 1.5);
+            if (myId !== token) { running = false; startBtn.disabled = false; status.textContent = 'Animación detenida.'; return; }
 
                 arr[j] = arr[j - gap];
                 j -= gap;
 
                 drawBars({});
                 await sleep(getDelay() * 0.5);
+            if (myId !== token) { running = false; startBtn.disabled = false; status.textContent = 'Animación detenida.'; return; }
               } else {
                 break;
               }
@@ -5108,7 +5133,7 @@ int main() {
       const speedNames = ['', 'Muy lenta', 'Lenta', 'Media', 'R\u00e1pida', 'Muy r\u00e1pida'];
 
       let arr = [];
-      let running = false;
+      let running = false, token = 0;
 
       function getDelay() {
         const v = parseInt(speedSlider.value);
@@ -5155,6 +5180,7 @@ int main() {
       }
 
       function resetVisualizer() {
+        token++;
         running = false;
         const size = parseInt(slider.value);
         generateArray(size);
@@ -5173,6 +5199,7 @@ int main() {
 
       async function runSelectionSort() {
         running = true;
+        const myId = ++token;
         startBtn.disabled = true;
         status.textContent = 'Buscando m\u00ednimos...';
 
@@ -5197,11 +5224,13 @@ int main() {
 
             drawBars({ comparing: [j], min: minIdx, sorted: [...sortedIndices] });
             await sleep(getDelay());
+            if (myId !== token) { running = false; startBtn.disabled = false; status.textContent = 'Animación detenida.'; return; }
 
             if (arr[j] < arr[minIdx]) {
               minIdx = j;
               drawBars({ min: minIdx, sorted: [...sortedIndices] });
               await sleep(getDelay() * 0.5);
+            if (myId !== token) { running = false; startBtn.disabled = false; status.textContent = 'Animación detenida.'; return; }
             }
           }
 
@@ -5214,6 +5243,7 @@ int main() {
           if (minIdx !== i) {
             drawBars({ swapping: [i, minIdx], sorted: [...sortedIndices] });
             await sleep(getDelay() * 1.5);
+            if (myId !== token) { running = false; startBtn.disabled = false; status.textContent = 'Animación detenida.'; return; }
 
             let temp = arr[i];
             arr[i] = arr[minIdx];
@@ -5223,6 +5253,7 @@ int main() {
           sortedIndices.add(i);
           drawBars({ sorted: [...sortedIndices] });
           await sleep(getDelay() * 0.5);
+            if (myId !== token) { running = false; startBtn.disabled = false; status.textContent = 'Animación detenida.'; return; }
         }
 
         sortedIndices.add(n - 1);
@@ -5258,7 +5289,7 @@ int main() {
       const speedNames = ['', 'Muy lenta', 'Lenta', 'Media', 'R\u00e1pida', 'Muy r\u00e1pida'];
 
       let arr = [];
-      let running = false;
+      let running = false, token = 0;
 
       function getDelay() {
         const v = parseInt(speedSlider.value);
@@ -5303,6 +5334,7 @@ int main() {
       }
 
       function resetVisualizer() {
+        token++;
         running = false;
         const size = parseInt(slider.value);
         generateArray(size);
@@ -5321,6 +5353,7 @@ int main() {
 
       async function runInsertionSort() {
         running = true;
+        const myId = ++token;
         startBtn.disabled = true;
         status.textContent = 'Insertando...';
 
@@ -5347,9 +5380,11 @@ int main() {
 
             drawBars({ comparing: [j, j + 1], sorted: [...sortedIndices] });
             await sleep(getDelay());
+            if (myId !== token) { running = false; startBtn.disabled = false; status.textContent = 'Animación detenida.'; return; }
 
             drawBars({ swapping: [j, j + 1], sorted: [...sortedIndices] });
             await sleep(getDelay() * 1.5);
+            if (myId !== token) { running = false; startBtn.disabled = false; status.textContent = 'Animación detenida.'; return; }
 
             arr[j + 1] = arr[j];
             j--;
@@ -5359,6 +5394,7 @@ int main() {
           sortedIndices.add(i);
           drawBars({ sorted: [...sortedIndices] });
           await sleep(getDelay() * 0.5);
+            if (myId !== token) { running = false; startBtn.disabled = false; status.textContent = 'Animación detenida.'; return; }
         }
 
         status.textContent = '\u00a1Ordenado!';
@@ -5392,7 +5428,7 @@ int main() {
       const speedNames = ['', 'Muy lenta', 'Lenta', 'Media', 'R\u00e1pida', 'Muy r\u00e1pida'];
 
       let arr = [];
-      let running = false;
+      let running = false, token = 0;
 
       function getDelay() {
         const v = parseInt(speedSlider.value);
@@ -5437,6 +5473,7 @@ int main() {
       }
 
       function resetVisualizer() {
+        token++;
         running = false;
         const size = parseInt(slider.value);
         generateArray(size);
@@ -5455,6 +5492,7 @@ int main() {
 
       async function runShakerSort() {
         running = true;
+        const myId = ++token;
         startBtn.disabled = true;
         status.textContent = 'Agitando...';
 
@@ -5479,10 +5517,12 @@ int main() {
 
             drawBars({ comparing: [i, i + 1], sorted: [...sorted] });
             await sleep(getDelay());
+            if (myId !== token) { running = false; startBtn.disabled = false; status.textContent = 'Animación detenida.'; return; }
 
             if (arr[i] > arr[i + 1]) {
               drawBars({ swapping: [i, i + 1], sorted: [...sorted] });
               await sleep(getDelay() * 1.5);
+            if (myId !== token) { running = false; startBtn.disabled = false; status.textContent = 'Animación detenida.'; return; }
 
               let temp = arr[i];
               arr[i] = arr[i + 1];
@@ -5493,6 +5533,7 @@ int main() {
           sorted.add(right);
           drawBars({ sorted: [...sorted] });
           await sleep(getDelay() * 0.6);
+            if (myId !== token) { running = false; startBtn.disabled = false; status.textContent = 'Animación detenida.'; return; }
           right--;
 
           if (!running) {
@@ -5510,10 +5551,12 @@ int main() {
 
             drawBars({ comparing: [i, i - 1], sorted: [...sorted] });
             await sleep(getDelay());
+            if (myId !== token) { running = false; startBtn.disabled = false; status.textContent = 'Animación detenida.'; return; }
 
             if (arr[i] < arr[i - 1]) {
               drawBars({ swapping: [i, i - 1], sorted: [...sorted] });
               await sleep(getDelay() * 1.5);
+            if (myId !== token) { running = false; startBtn.disabled = false; status.textContent = 'Animación detenida.'; return; }
 
               let temp = arr[i];
               arr[i] = arr[i - 1];
@@ -5524,6 +5567,7 @@ int main() {
           sorted.add(left);
           drawBars({ sorted: [...sorted] });
           await sleep(getDelay() * 0.6);
+            if (myId !== token) { running = false; startBtn.disabled = false; status.textContent = 'Animación detenida.'; return; }
           left++;
         }
 
@@ -5560,7 +5604,7 @@ int main() {
       const speedNames = ['', 'Muy lenta', 'Lenta', 'Media', 'R\u00e1pida', 'Muy r\u00e1pida'];
 
       let arr = [];
-      let running = false;
+      let running = false, token = 0;
 
       function getDelay() {
         const v = parseInt(speedSlider.value);
@@ -5607,6 +5651,7 @@ int main() {
       }
 
       function resetVisualizer() {
+        token++;
         running = false;
         const size = parseInt(slider.value);
         generateArray(size);
@@ -5625,6 +5670,7 @@ int main() {
 
       async function runMergeSort() {
         running = true;
+        const myId = ++token;
         startBtn.disabled = true;
         status.textContent = 'Dividiendo y mezclando...';
 
@@ -5640,6 +5686,7 @@ int main() {
 
             drawBars({ comparing: [i, j], sorted: [...sorted] });
             await sleep(getDelay());
+            if (myId !== token) { running = false; startBtn.disabled = false; status.textContent = 'Animación detenida.'; return; }
 
             if (arr[i] <= arr[j]) {
               temp.push(arr[i]);
@@ -5658,6 +5705,7 @@ int main() {
             arr[left + k] = temp[k];
             drawBars({ merging: [left + k], sorted: [...sorted] });
             await sleep(getDelay() * 0.4);
+            if (myId !== token) { running = false; startBtn.disabled = false; status.textContent = 'Animación detenida.'; return; }
           }
         }
 
@@ -5706,7 +5754,7 @@ int main() {
       const speedNames = ['', 'Muy lenta', 'Lenta', 'Media', 'R\u00e1pida', 'Muy r\u00e1pida'];
 
       let arr = [];
-      let running = false;
+      let running = false, token = 0;
 
       function getDelay() {
         const v = parseInt(speedSlider.value);
@@ -5751,6 +5799,7 @@ int main() {
       }
 
       function resetVisualizer() {
+        token++;
         running = false;
         const size = parseInt(slider.value);
         generateArray(size);
@@ -5769,6 +5818,7 @@ int main() {
 
       async function runHeapSort() {
         running = true;
+        const myId = ++token;
         startBtn.disabled = true;
         status.textContent = 'Construyendo mont\u00edculo...';
 
@@ -5784,18 +5834,21 @@ int main() {
           if (left < size) {
             drawBars({ comparing: [left, largest], sorted: [...sorted] });
             await sleep(getDelay());
+            if (myId !== token) { running = false; startBtn.disabled = false; status.textContent = 'Animación detenida.'; return; }
             if (arr[left] > arr[largest]) largest = left;
           }
 
           if (right < size) {
             drawBars({ comparing: [right, largest], sorted: [...sorted] });
             await sleep(getDelay());
+            if (myId !== token) { running = false; startBtn.disabled = false; status.textContent = 'Animación detenida.'; return; }
             if (arr[right] > arr[largest]) largest = right;
           }
 
           if (largest !== i) {
             drawBars({ swapping: [i, largest], sorted: [...sorted] });
             await sleep(getDelay() * 1.5);
+            if (myId !== token) { running = false; startBtn.disabled = false; status.textContent = 'Animación detenida.'; return; }
 
             let temp = arr[i];
             arr[i] = arr[largest];
@@ -5803,6 +5856,7 @@ int main() {
 
             drawBars({ sorted: [...sorted] });
             await sleep(getDelay() * 0.5);
+            if (myId !== token) { running = false; startBtn.disabled = false; status.textContent = 'Animación detenida.'; return; }
 
             await heapify(size, largest);
           }
@@ -5828,6 +5882,7 @@ int main() {
 
           drawBars({ swapping: [0, i], sorted: [...sorted] });
           await sleep(getDelay() * 1.5);
+            if (myId !== token) { running = false; startBtn.disabled = false; status.textContent = 'Animación detenida.'; return; }
 
           let temp = arr[0];
           arr[0] = arr[i];
@@ -5836,6 +5891,7 @@ int main() {
           sorted.add(i);
           drawBars({ sorted: [...sorted] });
           await sleep(getDelay() * 0.5);
+            if (myId !== token) { running = false; startBtn.disabled = false; status.textContent = 'Animación detenida.'; return; }
 
           await heapify(i, 0);
         }
@@ -5873,7 +5929,7 @@ int main() {
       const speedNames = ['', 'Muy lenta', 'Lenta', 'Media', 'R\u00e1pida', 'Muy r\u00e1pida'];
 
       let arr = [];
-      let running = false;
+      let running = false, token = 0;
 
       function getDelay() {
         const v = parseInt(speedSlider.value);
@@ -5920,6 +5976,7 @@ int main() {
       }
 
       function resetVisualizer() {
+        token++;
         running = false;
         const size = parseInt(slider.value);
         generateArray(size);
@@ -5938,6 +5995,7 @@ int main() {
 
       async function runBucketSort() {
         running = true;
+        const myId = ++token;
         startBtn.disabled = true;
         status.textContent = 'Distribuyendo en cubos...';
 
@@ -5955,6 +6013,7 @@ int main() {
 
           drawBars({ comparing: [i] });
           await sleep(getDelay());
+            if (myId !== token) { running = false; startBtn.disabled = false; status.textContent = 'Animación detenida.'; return; }
 
           let idx = Math.floor(arr[i] * numBuckets / (maxVal + 1));
           buckets[idx].push(arr[i]);
@@ -5984,6 +6043,7 @@ int main() {
             arr[pos] = val;
             drawBars({ merging: [pos] });
             await sleep(getDelay() * 0.4);
+            if (myId !== token) { running = false; startBtn.disabled = false; status.textContent = 'Animación detenida.'; return; }
             pos++;
           }
         }
@@ -6022,7 +6082,7 @@ int main() {
       const speedNames = ['', 'Muy lenta', 'Lenta', 'Media', 'R\u00e1pida', 'Muy r\u00e1pida'];
 
       let arr = [];
-      let running = false;
+      let running = false, token = 0;
 
       function getDelay() {
         const v = parseInt(speedSlider.value);
@@ -6069,6 +6129,7 @@ int main() {
       }
 
       function resetVisualizer() {
+        token++;
         running = false;
         const size = parseInt(slider.value);
         generateArray(size);
@@ -6087,6 +6148,7 @@ int main() {
 
       async function runCountingSort() {
         running = true;
+        const myId = ++token;
         startBtn.disabled = true;
         status.textContent = 'Contando frecuencias...';
 
@@ -6105,11 +6167,13 @@ int main() {
 
           drawBars({ comparing: [i] });
           await sleep(getDelay());
+            if (myId !== token) { running = false; startBtn.disabled = false; status.textContent = 'Animación detenida.'; return; }
           count[arr[i] - min]++;
         }
 
         status.textContent = 'Calculando posiciones...';
         await sleep(getDelay());
+            if (myId !== token) { running = false; startBtn.disabled = false; status.textContent = 'Animación detenida.'; return; }
 
         for (let i = 1; i < range; i++)
           count[i] += count[i - 1];
@@ -6131,6 +6195,7 @@ int main() {
 
           drawBars({ merging: [pos] });
           await sleep(getDelay());
+            if (myId !== token) { running = false; startBtn.disabled = false; status.textContent = 'Animación detenida.'; return; }
         }
 
         for (let i = 0; i < n; i++) {
